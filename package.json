@@ -4,7 +4,7 @@
   "description": "Typora粘贴图片自动上传到Bilibili",
   "main": "index.js",
   "scripts": {
-    "pkg": "pkg . --out-path=dist/",
+    "pkg": "pkg . --out-path=dist/ --compress Brotli",
     "build:mac": "go build -trimpath main.go",
     "build:win": "GOOS=windows GOARCH=amd64 go build -trimpath main.go",
     "build:linux": "CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -o main-linux main.go",
@@ -15,12 +15,14 @@
   "bin": "./index.js",
   "targets": [
     "node14-win-x64",
-    "node14-macos-x64"
+    "node14-macos-x64",
+    "node14-linux-x64"
   ],
   "pkg": {
     "targets": [
       "node14-win-x64",
-      "node14-macos-x64"
+      "node14-macos-x64",
+      "node14-linux-x64"
     ],
     "assets": [
       "./node_modules/form-data/*"

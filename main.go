@@ -39,15 +39,13 @@ func main() {
 	if strings.HasPrefix(csrf, "csrf=") {
 		csrf = strings.Replace(csrf, "csrf=", "", 1)
 	} else {
-		fmt.Println("请在命令尾部输入一个空格，再输入token=你的bili_jct, 例如\n ...-macos token=xx csrf=xx ")
+		fmt.Println("请在命令尾部输入一个空格，再输入csrf=你的bili_jct, 例如\n ...-macos token=xx csrf=xx ")
 		return
 	}
-	// fmt.Println("SESSDATA: ", SESSDATA)
 	for i := 2; i < len(args); i++ {
 		imagePath := args[i]
 		payload := &bytes.Buffer{}
 		writer := multipart.NewWriter(payload)
-		// 		writer.WriteField("category", "daily")
 		writer.WriteField("bucket", "openplatform")
 		writer.WriteField("csrf", csrf)
 		file, err := os.Open(imagePath)
@@ -68,7 +66,6 @@ func main() {
 		}
 		writer.Close()
 		url := "https://api.bilibili.com/x/upload/web/image"
-		// url := "http://localhost:5001/common/test"
 		client := &http.Client{}
 		req, err := http.NewRequest("POST", url, payload)
 		if err != nil {
@@ -97,14 +94,12 @@ func main() {
 			log.Fatal(jsonErr)
 		}
 		message := p.Message
-		// fmt.Println(message)
 		if p.Data.Location != "" {
 			if i == 2 {
 				fmt.Println("Upload Success:")
 			}
 			url := strings.Replace(p.Data.Location, "http", "https", 1)
 			fmt.Println(url)
-
 		} else if message == "请先登录" {
 			fmt.Println("token过期了，请及时更新命令行中的token")
 		} else {
