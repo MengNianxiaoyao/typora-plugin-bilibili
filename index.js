@@ -47,7 +47,7 @@ images.forEach((imgPath, index)=> {
       const result = JSON.parse(str);
       const { message: msg, data } = result;
       if (data?.location) {
-        if (index === args.length) {
+        if (index === 1) {
           console.log('Upload Success:');
         }
         const url = data.location.replace('http', 'https')

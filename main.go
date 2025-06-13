@@ -27,7 +27,6 @@ type Bilibili_Image_Resp struct {
 func main() {
 	flag.Parse()
 	args := flag.Args()
-	// fmt.Println("args: ", args, len(args))
 	SESSDATA := args[0]
 	if strings.HasPrefix(SESSDATA, "token=") {
 		SESSDATA = strings.Replace(SESSDATA, "token=", "", 1)
@@ -82,7 +81,6 @@ func main() {
 		defer res.Body.Close()
 
 		body, err := io.ReadAll(res.Body)
-		// 		fmt.Printf("%s", body)
 		if err != nil {
 			fmt.Println(err)
 			return
