@@ -1,6 +1,8 @@
 # typora-plugin-bilibili
 哔哩哔哩图片上传, Typora插件，实现图片粘贴即可上传到哔哩哔哩，并替换链接
 
+fork 来自 [typora-plugin-bilibili](https://github.com/xlzy520/typora-plugin-bilibili)
+
 ## 重要提示
 **由于B站相簿的上传API自身出现问题，现在切换到动态的图片API，因此需要多加一个参数csrf(为Cookie里面的bili_jct)**
 
@@ -9,10 +11,6 @@
 
 插件客户端路径 token=0829d25Cdd19b*b1 csrf=cb397c0fbf619237
 ```
-### 在线使用
-假如有需要使用Web版本的图床上传工具，那么可以使用这个地址，但是需要填写自己B站的SESSDATA和bili_jct，如果您有顾虑，还是建议使用客户端版
-
-[Web在线版](https://www.xiaojuzi.fun/bili-short-url/upload.html)
 
 ### 用Go重写，产物缩小5倍体积，点击下载即可
 <img width="777" alt="image" src="https://user-images.githubusercontent.com/28336270/167284443-9120b23b-fd22-4766-ae0d-4c047b988e9d.png">
@@ -20,12 +18,16 @@
 <img width="553" alt="image" src="https://user-images.githubusercontent.com/28336270/167284741-c78e3d98-618d-43a7-b910-f96a8cc940cb.png">
 
 ### 插件下载
-- [Windows](https://jiali0126.oss-cn-shenzhen.aliyuncs.com/typora/main.exe.zip)
-- [Mac](https://jiali0126.oss-cn-shenzhen.aliyuncs.com/typora/main)
-- [Linux](https://jiali0126.oss-cn-shenzhen.aliyuncs.com/typora/main-linux)
 
-### 项目地址(求颗Star呀)
-[typora-plugin-bilibili](https://github.com/xlzy520/typora-plugin-bilibili)
+#### 测试版
+- [Windows](https://github.com/MengNianxiaoyao/typora-plugin-bilibili/actions/workflows/ci.yml)
+- [Mac](https://github.com/MengNianxiaoyao/typora-plugin-bilibili/actions/workflows/ci.yml)
+- [Linux](https://github.com/MengNianxiaoyao/typora-plugin-bilibili/actions/workflows/ci.yml)
+
+#### 正式版
+- [Windows](https://github.com/MengNianxiaoyao/typora-plugin-bilibili/releases/latest/download/main.exe)
+- [Mac](https://github.com/MengNianxiaoyao/typora-plugin-bilibili/releases/latest/download/main)
+- [Linux](https://github.com/MengNianxiaoyao/typora-plugin-bilibili/releases/latest/download/main-linux)
 
 ### typora免费版下载
 - [Windows](https://typora.io/windows/dev_release.html)      
