@@ -9,6 +9,8 @@ on:
       - dev
     paths-ignore:
       - '.github/**'
+      - 'dev.md'
+      - 'README.md'
 
 jobs:
   build-go:
