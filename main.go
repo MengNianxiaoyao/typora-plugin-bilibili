@@ -6,7 +6,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"log"
 	"mime/multipart"
 	"net/http"
 	"os"
@@ -27,17 +26,13 @@ type Bilibili_Image_Resp struct {
 func main() {
 	flag.Parse()
 	args := flag.Args()
-	SESSDATA := args[0]
-	if strings.HasPrefix(SESSDATA, "token=") {
-		SESSDATA = strings.Replace(SESSDATA, "token=", "", 1)
-	} else {
+	SESSDATA := strings.TrimPrefix(args[0], "token=")
+	if SESSDATA == args[0] {
 		fmt.Println("请在命令尾部输入一个空格，再输入token=你的SESSDATA, 例如\n ...-macos token=xx csrf=xx ")
 		return
 	}
-	csrf := args[1]
-	if strings.HasPrefix(csrf, "csrf=") {
-		csrf = strings.Replace(csrf, "csrf=", "", 1)
-	} else {
+	csrf := strings.TrimPrefix(args[1], "csrf=")
+	if csrf == args[1] {
 		fmt.Println("请在命令尾部输入一个空格，再输入csrf=你的bili_jct, 例如\n ...-macos token=xx csrf=xx ")
 		return
 	}
@@ -50,18 +45,18 @@ func main() {
 		file, err := os.Open(imagePath)
 		if err != nil {
 			fmt.Println("打开文件失败: ", err)
-			return
+			continue
 		}
 		defer file.Close()
 		part, err := writer.CreateFormFile("file", filepath.Base(imagePath))
 		if err != nil {
 			fmt.Println("创建文件失败: ", err)
-			return
+			continue
 		}
 		_, err = io.Copy(part, file)
 		if err != nil {
 			fmt.Println(err)
-			return
+			continue
 		}
 		writer.Close()
 		url := "https://api.bilibili.com/x/upload/web/image"
@@ -69,27 +64,27 @@ func main() {
 		req, err := http.NewRequest("POST", url, payload)
 		if err != nil {
 			fmt.Println(err)
-			return
+			continue
 		}
 		req.Header.Add("Cookie", "SESSDATA="+SESSDATA)
 		req.Header.Add("Content-Type", writer.FormDataContentType())
 		res, err := client.Do(req)
 		if err != nil {
 			fmt.Printf("%s", err)
-			return
+			continue
 		}
 		defer res.Body.Close()
 
 		body, err := io.ReadAll(res.Body)
 		if err != nil {
 			fmt.Println(err)
-			return
+			continue
 		}
 		p := Bilibili_Image_Resp{}
 		jsonErr := json.Unmarshal(body, &p)
 		if jsonErr != nil {
-			fmt.Println("响应错误，可能是token已过期")
-			log.Fatal(jsonErr)
+			fmt.Printf("响应错误，可能是token已过期: %v\n", jsonErr)
+			continue
 		}
 		message := p.Message
 		if p.Data.Location != "" {

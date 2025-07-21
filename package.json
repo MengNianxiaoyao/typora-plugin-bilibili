@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "pkg": "pkg . --out-path=dist/ --compress Brotli",
-    "build:mac": "go build -trimpath main.go",
-    "build:win": "GOOS=windows GOARCH=amd64 go build -trimpath main.go",
-    "build:linux": "CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -o main-linux main.go",
+    "build:mac": "go build -trimpath -ldflags=\"-s -w\" main.go",
+    "build:win": "GOOS=windows GOARCH=amd64 go build -trimpath -ldflags=\"-s -w\" main.go",
+    "build:linux": "CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags=\"-s -w\" -o main-linux main.go",
     "build": "npm run build:mac && npm run build:win && npm run build:linux",
     "test:node": "node index.js token=\"08b1\" csrf=\"cb37\" 1.jpg",
     "test:go": "./main token=\"08b1\" csrf=\"cb37\" 1.jpg"
@@ -31,9 +31,10 @@
   "keywords": [
     "Typora",
     "Bilibili",
-    "Typora-plugin，img-upload"
+    "Typora-plugin",
+    "Img-upload"
   ],
-  "author": "xlzy520",
+  "author": "MengNianxiaoyao",
   "license": "ISC",
   "dependencies": {
     "@types/fs-extra": "^9.0.13",
