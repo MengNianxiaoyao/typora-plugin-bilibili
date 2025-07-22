@@ -27,10 +27,6 @@ func main() {
 	flag.Parse()
 	args := flag.Args()
 	SESSDATA := strings.TrimPrefix(args[0], "token=")
-	if SESSDATA == args[0] {
-		fmt.Println("请在命令尾部输入一个空格，再输入token=你的SESSDATA, 例如\n ...-macos token=xx csrf=xx ")
-		return
-	}
 	csrf := strings.TrimPrefix(args[1], "csrf=")
 	if csrf == args[1] {
 		fmt.Println("请在命令尾部输入一个空格，再输入csrf=你的bili_jct, 例如\n ...-macos token=xx csrf=xx ")
