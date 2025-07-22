@@ -61,5 +61,3 @@ images.forEach((imgPath, index)=> {
   });
   form.pipe(request);
 })
-
-
